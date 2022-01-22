@@ -1,14 +1,13 @@
 {
-  "name": "28-Stu_Mini-Project",
+  "name": "18-Homework-Social-Network-API",
   "version": "1.0.1",
-  "description": "Mongoose back-end project - Develop",
+  "description": "NoSql unit Homework",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "seed": "node utils/seed",
-    "heroku-postbuild": "node utils/seed.js"
+    "seed": "node utils/seed"
   },
   "dependencies": {
     "express": "^4.17.1",
