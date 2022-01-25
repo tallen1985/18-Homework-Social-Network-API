@@ -11,7 +11,7 @@ module.exports = {
         res.json({ message: "No Thoughts Found" });
       }
     } catch (err) {
-      res.status(500).json({"Error": err});
+      res.status(500).json({ Error: err });
     }
   },
   async getOneThought(req, res) {
@@ -23,7 +23,22 @@ module.exports = {
         res.json({ message: "No Thoughts Found" });
       }
     } catch (err) {
-      res.status(500).json({"Error": err});
+      res.status(500).json({ Error: err });
+    }
+  },
+  async addThought(req, res) {
+    try {
+      const username = req.body.username;
+      const result = await Thought.create(req.body);
+
+      const addToUser = await User.findOneAndUpdate(
+        { _id: username },
+        { $push: { thoughts: result._id } }
+      );
+
+      res.status(200).json(result);
+    } catch (err) {
+      res.status(500).json({ Error: err });
     }
   },
 };

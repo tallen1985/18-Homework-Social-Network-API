@@ -2,8 +2,10 @@ const Mongoose = require("mongoose");
 
 const reactionSchema = new Mongoose.Schema(
   {
-    reactionId: Mongoose.ObjectId,
-    default: new Mongoose.ObjectId(),
+    reactionId: {
+      type: Mongoose.Schema.ObjectId,
+      auto: true,
+    },
     reactionBody: {
       type: String,
       required: true,
@@ -31,6 +33,9 @@ const thoughtSchema = new Mongoose.Schema(
   { timestamps: true },
   {
     toJSON: {
+      virtuals: true,
+    },
+    toObject: {
       virtuals: true,
     },
     id: false,
