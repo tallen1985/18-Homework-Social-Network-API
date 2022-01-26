@@ -5,7 +5,10 @@ module.exports = {
   //get all users
   async getAllUsers(req, res) {
     try {
-      const result = await User.find().populate("thoughts");
+      const result = await User.find()
+        .select("-__v")
+        .populate("thoughts")
+        .populate("friends");
       if (result) {
         res.json(result);
       } else {
@@ -68,6 +71,23 @@ module.exports = {
       } else {
         res.status(400).json(err);
       }
+    } catch (err) {
+      res.status(500).json({ Error: err });
+    }
+  },
+  addFriend(req, res) {
+    try {
+      User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.params.friendId } },
+        (err, userData) => {
+          if (userData) {
+            res.status(200).json(userData);
+          } else {
+            res.status(400).json(err);
+          }
+        }
+      );
     } catch (err) {
       res.status(500).json({ Error: err });
     }

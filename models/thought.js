@@ -1,5 +1,10 @@
 const Mongoose = require("mongoose");
 
+const formatDate = (d) => {
+  const date = new Date(d);
+  return date.toLocaleDateString();
+};
+
 const reactionSchema = new Mongoose.Schema(
   {
     reactionId: {
@@ -15,8 +20,21 @@ const reactionSchema = new Mongoose.Schema(
       type: String,
       required: true,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: formatDate,
+    },
   },
-  { timestamps: true }
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
+  }
 );
 
 const thoughtSchema = new Mongoose.Schema(
@@ -29,11 +47,16 @@ const thoughtSchema = new Mongoose.Schema(
     },
     username: { type: Mongoose.Schema.Types.ObjectId, ref: "user" },
     reactions: [reactionSchema],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: formatDate,
+    },
   },
-  { timestamps: true },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     toObject: {
       virtuals: true,
