@@ -41,4 +41,29 @@ module.exports = {
       res.status(500).json({ Error: err });
     }
   },
+  addReaction(req, res) {
+    try {
+      Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        {
+          $push: {
+            reactions: {
+              reactionBody: req.body.reactionBody,
+              username: req.body.username,
+            },
+          },
+        },
+        { new: true },
+        (err, result) => {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.status(200).json(result);
+          }
+        }
+      );
+    } catch (err) {
+      res.status(500).json({ Error: err });
+    }
+  },
 };
