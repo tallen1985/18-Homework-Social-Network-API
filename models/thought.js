@@ -1,10 +1,12 @@
 const Mongoose = require("mongoose");
 
+//function to format date upon query
 const formatDate = (d) => {
   const date = new Date(d);
   return date.toLocaleDateString();
 };
 
+//Schema to create reaction model embedded into Thought model
 const reactionSchema = new Mongoose.Schema(
   {
     reactionId: {
@@ -37,6 +39,7 @@ const reactionSchema = new Mongoose.Schema(
   }
 );
 
+//Schema to create Thought Model
 const thoughtSchema = new Mongoose.Schema(
   {
     thoughtText: {
@@ -64,10 +67,12 @@ const thoughtSchema = new Mongoose.Schema(
     id: false,
   }
 );
+//create a virtual field to display amount of reactions.
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
+//create the thought Object.
 const Thought = Mongoose.model("thought", thoughtSchema);
 
 module.exports = Thought;

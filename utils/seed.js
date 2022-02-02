@@ -8,10 +8,9 @@ connection.once("open", async () => {
 
   await User.deleteMany({});
 
-  // Drop existing students
+  // Drop existing users
   await Thought.deleteMany({});
 
-  // Add students to the collection and await the results
   await User.create({
     username: "jakeAllen",
     email: "jake@allen.com",

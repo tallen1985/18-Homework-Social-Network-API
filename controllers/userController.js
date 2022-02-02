@@ -75,11 +75,13 @@ module.exports = {
       res.status(500).json({ Error: err });
     }
   },
+  //add a friend to user (api/users/:id/friend/:friendId)
   addFriend(req, res) {
     try {
       User.findOneAndUpdate(
         { _id: req.params.userId },
         { $addToSet: { friends: req.params.friendId } },
+        { new: true },
         (err, userData) => {
           if (userData) {
             res.status(200).json(userData);
@@ -92,11 +94,13 @@ module.exports = {
       res.status(500).json({ Error: err });
     }
   },
+  //delete friend from User (api/users/:id/friend/:friendId)
   deleteFriend(req, res) {
     try {
       User.findOneAndUpdate(
         { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
+        { new: true },
         (err, userData) => {
           if (userData) {
             res.status(200).json(userData);
