@@ -41,3 +41,7 @@ Any additional questions, reach me at my email jake.allen@me.com
 ## Links and Screenshot
 
 [Github Repository](https://github.com/tallen1985/18-Homework-Social-Network-API)
+
+[Performance Video] (https://watch.screencastify.com/v/6SQy7oiImzn560uabBZo)
+
+[![Screenshot](18-Screenshot.png)
